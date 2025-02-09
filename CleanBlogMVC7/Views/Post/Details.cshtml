@@ -1,0 +1,38 @@
+﻿
+@model Post
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('@Url.Content("~/Images/" + @Model.ImageName)')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <h1>@Model.Title</h1>
+                    <h2 class="subheading">@Model.Description</h2>
+                    <span class="meta">
+                        Posted by
+                        <a href="#!">@Model.Author.FullName</a>
+                        on @Model.PostDate.ToString("dd/MM/yyyy")
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<!-- Post Content-->
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                @Html.Raw(Model.Body)
+            </div>
+        </div>
+    </div>
+</article>

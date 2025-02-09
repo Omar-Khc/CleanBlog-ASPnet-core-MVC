@@ -1,0 +1,43 @@
+﻿@model CleanBlogMVC7.ViewModels.LoginVM
+
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Login</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="my-5">
+                    <form method="post">
+                        <div asp-validation-summary="All"></div>
+                        <div class="form-floating">
+                            <input class="form-control" asp-for="Email" placeholder="Enter your Email..." data-sb-validations="required" />
+                            <label asp-for="Email"></label>
+                            <span class="text-danger" asp-validation-for="Email"></span>
+                        </div>
+                        <div class="form-floating">
+                            <input class="form-control" asp-for="Password" placeholder="Enter your Password..." data-sb-validations="required" />
+                            <label asp-for="Password"></label>
+                            <span class="text-danger" asp-validation-for="Password"></span>
+                        </div>
+
+                        <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                        <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

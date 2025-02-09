@@ -1,0 +1,68 @@
+﻿@model CleanBlogMVC7.ViewModels.AddPostVM
+
+
+
+
+<div class="row justify-content-center">
+    <div class="col-md-9">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All"></div>
+            <div class="mb-4">
+                <label asp-for="Title"></label>
+                <input class="form-control" asp-for="Title" placeholder="Title..." data-sb-validations="required" />
+                <span class="text-danger" asp-validation-for="Title"></span>
+            </div>
+            <div class="mb-4">
+                <label asp-for="Description"></label>
+                <input class="form-control" asp-for="Description" placeholder="Enter your Last name..." data-sb-validations="required" />
+                <span class="text-danger" asp-validation-for="Description"></span>
+            </div>
+            <div class="mb-4">
+                <label asp-for="PostDate"></label>
+                <input class="form-control" asp-for="PostDate" placeholder="Enter your Last name..." data-sb-validations="required" />
+                <span class="text-danger" asp-validation-for="PostDate"></span>
+            </div>
+            <div class="mb-4">
+                <label asp-for="Body"></label>
+                <textarea class="form-control" asp-for="Body" placeholder="Body ..." rows="10" style="height: 12rem" data-sb-validations="required"></textarea>
+                <span class="text-danger" asp-validation-for="Body"></span>
+            </div>
+            <div class="mb-4">
+                <label asp-for="Image"></label>
+                <input class="form-control" asp-for="Image" />
+                <span class="text-danger" asp-validation-for="Image"></span>
+            </div>
+            <br />
+            <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">Send</button>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Body'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
+    <!-- 
+        If I need to convert it to Arabic
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Body'), {
+                language: {
+                    ui: 'ar',
+                    content: 'ar'
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
+    -->
+}

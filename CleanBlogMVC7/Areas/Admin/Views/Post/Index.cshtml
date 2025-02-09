@@ -1,0 +1,111 @@
+﻿@model List<Post>
+@{
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <a class="btn btn-success" asp-action="Create" asp-controller="Post" asp-area="Admin">Create Post</a>
+
+        @if (TempData["success"] != null)
+        {
+
+            <div><script>callSwal();</script></div>
+
+            <div class="alert alert-success">
+                @TempData["success"]
+            </div>
+
+        }
+
+        @if (TempData["edit-success"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["edit-success"]
+            </div>
+        }
+
+        <hr />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var post in Model)
+                {
+                    <tr>
+                        <td>
+                            <img style="border-radius:5px; width:150px; height:150px; object-fit:cover; " src="~/Images/Thumbs/@post.ImageName" />
+                            @post.Title
+                        </td>
+                        <td>@post.PostDate.ToString("dd/MM/yyyy")</td>
+                        <td>@post.Author.FullName</td>
+                        <td>
+                            <a class="btn btn-primary" asp-area="Admin" asp-controller="Post" asp-action="Edit" asp-route-id="@post.Id">Edit</a>
+                            <a class="btn btn-danger btnDelete" asp-area="Admin" asp-controller="Post" asp-action="Delete" asp-route-id="@post.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        const btnDelete = document.querySelectorAll(".btnDelete");
+        btnDelete.forEach((btn) => {
+            btn.addEventListener("click", function (e) {
+                // alert("test");
+                //promice
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        const url = this.getAttribute("href");
+                        fetch(url).then((response) => response.json()).then(function (data) {
+                            console.log('this', this);
+                            console.log('btn', btn);
+                            console.log('tr', btn.closest('tr'));
+                            btn.closest('tr').remove();
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        });
+
+                    }
+                })
+
+                e.preventDefault();
+            });
+        });
+    </script>
+
+    <script>
+        function callSwal(){
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    </script>
+
+}
